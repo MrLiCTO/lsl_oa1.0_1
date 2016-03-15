@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-10 16:37:31 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.shilong.oa.domain.Role" table="Role">
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+        
+        <!-- Role 与 user多对多 -->
+        <set name="users" table="user_role">
+       				<key column="roleId"></key>
+       				<many-to-many class="com.shilong.oa.domain.User" column="userId" ></many-to-many>
+       		</set>
+       		 <!-- Role 与Privillege多对多 -->
+       		<set name="privileges" table="role_privilege" lazy="false">
+       				<key column="roleId"></key>
+       				<many-to-many class="com.shilong.oa.domain.Privilege"  column="privilegeId "></many-to-many>
+       		</set>
+       		
+    </class>
+</hibernate-mapping>

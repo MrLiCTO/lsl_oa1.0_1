@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>lsl_oa1.0</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+   <!-- 注意，用来解决懒加载问题的这个过滤器，必须先执行，顺序错了，就不好使了 ,不推荐使用，原因：性能问题-->
+  <filter>
+ 	    <filter-name>openSessionInviewFilter</filter-name>
+ 	    <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter  </filter-class>
+ 	</filter>
+ 	
+ 	<filter-mapping>
+ 	     <filter-name>openSessionInviewFilter</filter-name>
+ 	    <url-pattern>*.action</url-pattern>
+ 	</filter-mapping>
+ 	
+ 	
+ 	
+  <filter>
+    <filter-name>action</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+ 	 </filter>
+ 	 
+ 	<filter-mapping>
+    <filter-name>action</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+ 
+  
+  
+    <!-- needed for ContextLoaderListener -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+
+	<!-- Bootstraps the root web application context before servlet initialization -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+	<listener-class>com.shilong.oa.util.InitListener</listener-class>
+	</listener>
+	
+	
+</web-app>

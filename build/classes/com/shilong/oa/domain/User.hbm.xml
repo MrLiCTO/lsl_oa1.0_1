@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-10 16:37:31 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.shilong.oa.domain.User" table="USER">
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        
+         <property name="gender" type="java.lang.String">
+            <column name="gender" />
+        </property>
+        
+        <property name="loginName" type="java.lang.String">
+            <column name="loginname" />
+        </property>
+        
+        <property name="password" type="java.lang.String">
+            <column name="password" />
+        </property>
+        
+        <property name="phoneNumber" type="java.lang.String">
+            <column name="phonenumber" />
+        </property>
+        
+        <property name="email" type="java.lang.String">
+            <column name="email" />
+        </property>
+        
+        <property name="description" type="java.lang.String">
+            <column name="description" />
+        </property>
+        
+       
+        
+         <!-- User与Department 多对一 -->
+      		<many-to-one name="department"  column="deptId" class="com.shilong.oa.domain.Department"></many-to-one>
+         
+          <!--  user与role多对多 -->
+       		<set name="roles" table="user_role"  lazy="false">
+       				<key column="userId"></key>
+       				<many-to-many class="com.shilong.oa.domain.Role" column="roleId" ></many-to-many>
+       		</set>
+        
+    </class>
+</hibernate-mapping>
